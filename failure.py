@@ -11,8 +11,8 @@ model = joblib.load('model.pkl')
 encoder = joblib.load('encoder.pkl')  
 # encoder.classes_ berisi daftar semua machine_type
 
-# —————— UI ——————
-st.title("Industrial Machine Failure Prediction")
+# # —————— UI ——————
+# st.title("Industrial Machine Failure Prediction")
 
 st.markdown(
     """
@@ -21,6 +21,7 @@ st.markdown(
 )
 
 # Dinamis: ambil daftar machine_type dari encoder
+
 machine_types = list(encoder.classes_)
 machine_type = st.selectbox("Machine Type", machine_types)
 
