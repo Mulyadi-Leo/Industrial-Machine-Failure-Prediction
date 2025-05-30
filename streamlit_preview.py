@@ -13,7 +13,7 @@ if page == "Introduction":
 
     # === Kolom Kiri ===
     with col_kiri:
-        st.image("mul.png",caption="Data Scientist", use_container_width=True)
+        st.image("gambar/mul.png",caption="Data Scientist", use_container_width=True)
        
 
     # === Kolom Kanan ===
@@ -35,9 +35,9 @@ if page == "Introduction":
         col1, col2, col3 = st.columns(3)
 
         # Buka dan resize gambar
-        img1 = Image.open("colab.png").resize((150, 150))
-        img2 = Image.open("postgre.png").resize((150, 150))
-        img3 = Image.open("powerbi.png").resize((150, 150))
+        img1 = Image.open("gambar/colab.png").resize((150, 150))
+        img2 = Image.open("gambar/postgre.png").resize((150, 150))
+        img3 = Image.open("gambar/powerbi.png").resize((150, 150))
 
         with col1:
             st.image(img1, use_container_width=True)
@@ -53,15 +53,15 @@ elif page == "Project":
     with st.container():
         st.markdown('<div class="top-container">', unsafe_allow_html=True)
         # Menampilkan gambar banner
-        img = Image.open("red.jpg")
-        img_resized = img.resize((1000, 200))  # Resize to width=1000, height=300
+        img = Image.open("gambar/machine.png")
+        img_resized = img.resize((1000, 400))  # Resize to width=1000, height=300
 
         st.image(img_resized)
         st.markdown('</div>', unsafe_allow_html=True)
 
-        st.header("Healthcare dataset analysis")
-        st.write("Pada proyek ini, saya menggunakan dataset Healthcare dari Kaggle untuk menganalisis provider asuransi yang paling sering digunakan berdasarkan kondisi medis. " \
-        "Selanjutnya, penelitian ini akan mengevaluasi apakah provider yang paling sering digunakan tersebut memang merupakan pilihan terbaik untuk masing-masing kondisi medis.")
+        st.header("Industrial Machine Failure Prediction")
+        st.write("A machine learning project to predict industrial machine failures, aiming to prevent downtime, reduce maintenance costs, and improve efficiency. " \
+        "Includes data balancing, cross-validation, feature importance analysis, and model evaluation")
 
     # Bagian bawah (dinamis)
     with st.container():
