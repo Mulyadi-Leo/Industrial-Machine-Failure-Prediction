@@ -6,7 +6,7 @@ import joblib
 @st.cache_resource
 def load_model():
     model = joblib.load("model.joblib")
-    encoder = joblib.load("encoder.pkl")
+    encoder = joblib.load("encoder_machine_type.pkl")
     return model, encoder
 
 model, encoder = load_model()
@@ -32,6 +32,9 @@ year_input = st.number_input("2. Tahun Instalasi (Installation_Year)",
 oil_input = st.number_input("3. Level Oli (%)",
                             min_value=0.0, max_value=100.0, value=50.0, step=0.1)
 
+coolant_input = st.number_input("3. Level Coolant (%)",
+                            min_value=0.0, max_value=100.0, value=50.0, step=0.1)
+
 # 4. Power Consumption (kW)
 power_input = st.number_input("4. Konsumsi Daya (kW)",
                               min_value=0.0, value=10.0, step=0.1)
@@ -43,8 +46,8 @@ maint_input = st.number_input("5. Hari Sejak Perawatan Terakhir",
 # 6. [Fitur ke-6] – jika ada
 # Jika di model Anda ada fitur keenam, tambahkan input di sini. 
 # Jika tidak, Anda bisa menghapusnya.
-other_input = st.number_input("6. Fitur Tambahan",
-                              min_value=0.0, value=0.0, step=0.1)
+# other_input = st.number_input("6. Fitur Tambahan",
+#                               min_value=0.0, value=0.0, step=0.1)
 
 # --- Prediksi ---
 if st.button("Prediksi"):
@@ -52,11 +55,12 @@ if st.button("Prediksi"):
     df = pd.DataFrame({
         "Machine_Type": [machine_input],
         "Installation_Year": [year_input],
-        "Oil_Level_pct...Level_pct": [oil_input],
+        "Oil_Level_pct": [oil_input],
+        "Coolant_Level_pct": [coolant_input],
         "Power_Consumption_kW": [power_input],
         "Last_Maintenance_Days_Ago": [maint_input],
         # tambahkan fitur keenam di sini:
-        "Other_Feature": [other_input]
+        # "Other_Feature": [other_input]
     })
 
     # Encode kolom kategori
@@ -65,10 +69,11 @@ if st.button("Prediksi"):
     # Pastikan urutan kolom sesuai yang dipakai model
     X = df[["Machine_Type",
             "Installation_Year",
-            "Oil_Level_pct...Level_pct",
+            "Oil_Level_pct",
+            "Coolant_Level_pct",
             "Power_Consumption_kW",
             "Last_Maintenance_Days_Ago",
-            "Other_Feature"
+            # "Other_Feature"
            ]]
 
     # Lakukan prediksi
@@ -76,7 +81,7 @@ if st.button("Prediksi"):
     proba = model.predict_proba(X)[0]
 
     label = "Gagal" if y_pred == 1 else "Sukses"
-    score = proba[y_pred] * 100
+    # score = proba[int(y_pred)] * 100
 
     st.write(f"### Hasil Prediksi: **{label}**")
-    st.write(f"Probabilitas: {score:.2f}%")
+    # st.write(f"Probabilitas: {score:.2f}%")

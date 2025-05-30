@@ -11,7 +11,7 @@ import joblib
 
 # Atau load model + encoder terpisah:
 model = joblib.load('model.joblib')
-encoder = joblib.load('encoder.pkl')  
+encoder = joblib.load('encoder_machine_type.pkl')  
 # encoder.classes_ berisi daftar semua machine_type
 
 # # —————— UI ——————
